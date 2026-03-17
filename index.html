@@ -2,111 +2,141 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>辰光英雄傳 - 品格實驗室</title>
     <style>
-        body { font-family: "Microsoft JhengHei", sans-serif; background-color: #fdfaf1; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        #game-box { background: white; border: 3px solid #8b0000; border-radius: 20px; width: 600px; padding: 40px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        h1 { color: #8b0000; font-size: 48px; margin-bottom: 10px; }
-        .line { width: 100%; height: 3px; background-color: #ffcc00; margin-bottom: 30px; }
-        p { font-size: 20px; line-height: 1.6; color: #333; margin-bottom: 40px; }
-        .btn { background-color: #8b0000; color: white; border: none; padding: 15px 80px; font-size: 24px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background-color: #a00000; transform: scale(1.05); }
-        .hidden { display: none; }
-        .character-img { max-width: 250px; border-radius: 10px; margin-bottom: 20px; }
-        .choice-btn { display: block; width: 100%; padding: 12px; margin: 10px 0; font-size: 18px; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; background: #fff; }
-        .choice-btn:hover { background: #f0f0f0; }
+        :root { --primary: #8b0000; --gold: #ffd700; --bg: #fdfaf1; }
+        body { font-family: "Microsoft JhengHei", sans-serif; background: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #333; }
+        #game-container { background: white; width: 95%; max-width: 600px; padding: 30px; border: 4px solid var(--primary); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; box-sizing: border-box; }
+        h1 { color: var(--primary); font-size: 2.5em; margin-bottom: 5px; }
+        .line { width: 80%; height: 3px; background: var(--gold); margin: 0 auto 25px; }
+        .screen { display: none; animation: fadeIn 0.5s; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .img-box { width: 100%; height: 350px; background: #f0f0f0; border-radius: 15px; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 1px solid #ddd; }
+        .img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .question { font-size: 1.2em; font-weight: bold; margin-bottom: 20px; line-height: 1.5; padding: 0 10px; }
+        .btn-list { display: grid; gap: 12px; padding: 0 10px; }
+        button { padding: 15px; font-size: 1.1em; cursor: pointer; border: 2px solid #eee; border-radius: 12px; background: white; transition: 0.3s; font-family: inherit; }
+        button:hover { background: #fff9e6; border-color: var(--gold); }
+        .start-btn, .next-btn { background: var(--primary) !important; color: white !important; border: none; font-size: 1.3em; margin-top: 10px; width: 100%; }
+        .feedback { margin-top: 20px; padding: 15px; border-radius: 10px; display: none; font-weight: bold; }
+        .correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .wrong { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
 
-<div id="game-box">
-    <div id="start-screen">
-        <h1>辰光英雄傳</h1>
-        <div class="line"></div>
-        <p>歡迎來到辰光國小品格實驗室！<br><br>我們正尋找具備「責任、正義、感恩」特質的英雄。請通過三位歷史人物的考驗，修復校園的能量場！</p>
-        <button class="btn" onclick="startGame()">開始挑戰</button>
+<div id="game-container">
+    <h1>辰光英雄傳</h1>
+    <div class="line"></div>
+
+    <div id="s0" class="screen active">
+        <p style="font-size: 1.2em; line-height: 1.8;">歡迎來到<b>辰光國小</b>品格實驗室！<br><br>我們正尋找具備「責任、正義、感恩」特質的英雄。請通過三位歷史人物的考驗，修復校園的能量場！</p>
+        <button class="start-btn" onclick="go(1)">開始挑戰</button>
     </div>
 
-    <div id="game-content" class="hidden">
-        <h2 id="stage-title">第一關：池府王爺的考驗</h2>
-        <img id="stage-img" src="" class="character-img">
-        <p id="question-text">題目載入中...</p>
-        <div id="choices"></div>
+    <div id="game-play" class="screen">
+        <h2 id="stage-title" style="color:var(--primary)"></h2>
+        <div class="img-box">
+            <img id="stage-img" src="" alt="關卡人物">
+        </div>
+        <div class="question" id="question-text"></div>
+        <div class="btn-list" id="choices"></div>
+        <div id="feedback-box" class="feedback"></div>
+        <button id="next-btn" class="next-btn" style="display:none" onclick="nextStage()">進入下一關</button>
+    </div>
+
+    <div id="s-end" class="screen">
+        <h2 style="color:var(--primary)">恭喜完成挑戰！</h2>
+        <p style="font-size: 1.1em; line-height: 1.6;">你已成功展現了責任、正義與感恩的心，<br>正式成為「辰光品格小英雄」！</p>
+        <div style="font-size: 3em; margin: 20px 0;">🏆</div>
+        <button class="start-btn" onclick="location.reload()">重新遊玩</button>
     </div>
 </div>
 
 <script>
+    // 根據您的 GitHub 檔案清單進行路徑對應
     const stages = [
         {
             title: "第一關：池府王爺的【責任】",
-            img: "https://raw.githubusercontent.com/username/repo/main/chi_fu.jpg", // 註：此處需更換為您的圖片路徑
+            img: "tzu.jfif", // 對應您上傳的池府王爺圖片檔名
             question: "如果你發現同學在走廊奔跑快要撞到人了，你會怎麼做？",
-            choices: [
-                { text: "主動出聲提醒同學注意安全", correct: true, feedback: "正確！主動提醒是責任感的表現！" },
-                { text: "裝作沒看見，反正不是我撞的", correct: false, feedback: "不對喔，池王爺會希望你守護大家的安全。" }
+            options: [
+                { text: "主動出聲提醒同學注意安全", correct: true, info: "正確！主動提醒是責任感的表現！" },
+                { text: "裝作沒看見，反正不是我撞的", correct: false, info: "不對喔，池王爺會希望你守護大家的安全。" }
             ]
         },
         {
             title: "第二關：廖添丁的【正義】",
-            img: "https://raw.githubusercontent.com/username/repo/main/liao_tian_ding.jpg",
-            question: "看到同學被冷落，你會怎麼做？",
-            choices: [
-                { text: "安慰被冷落的同學，並邀他一起玩", correct: true, feedback: "太棒了！像廖添丁一樣保護弱小同學！" },
-                { text: "怕惹麻煩所以不理會", correct: false, feedback: "廖添丁會希望你勇敢一點，用對的方法站出來。" }
+            img: "liu.jpg", // 對應您上傳的廖添丁圖片檔名
+            question: "當你看到有同學被排擠、沒有人跟他玩，你會怎麼做？",
+            options: [
+                { text: "主動邀請他加入我們的遊戲", correct: true, info: "太棒了！像廖添丁一樣保護弱小！" },
+                { text: "跟著大家一起不理他", correct: false, info: "廖添丁會希望你勇敢一點，用對的方法站出來。" }
             ]
         },
         {
             title: "第三關：廣澤尊王的【感恩】",
-            img: "https://raw.githubusercontent.com/username/repo/main/guang_ze.jpg",
-            question: "老師幫大家爭取到戶外教學，你會？",
-            choices: [
-                { text: "寫一張小卡片謝謝老師的辛苦", correct: true, feedback: "這就是廣澤尊王教導我們的孝與義！" },
-                { text: "覺得是應該的，沒什麼好謝的", correct: false, feedback: "凡事感恩能讓你獲得更多正能量喔。" }
+            img: "kuan.jpg", // 對應您上傳的廣澤尊王圖片檔名
+            question: "志工大夫辛苦幫忙維持交通，放學經過時你會？",
+            options: [
+                { text: "點頭微笑並大聲說聲謝謝您", correct: true, info: "這就是廣澤尊王教導我們的孝與義！" },
+                { text: "低頭趕快走過去，不用特別表示", correct: false, info: "凡事感恩能讓你獲得更多正能量喔。" }
             ]
         }
     ];
 
-    let currentStage = 0;
+    let current = 0;
 
-    function startGame() {
-        document.getElementById('start-screen').classList.add('hidden');
-        document.getElementById('game-content').classList.remove('hidden');
-        showStage();
+    function go(s) {
+        document.querySelectorAll('.screen').forEach(div => div.classList.remove('active'));
+        if (s === 1) {
+            document.getElementById('game-play').classList.add('active');
+            loadStage();
+        } else {
+            document.getElementById('s-end').classList.add('active');
+        }
     }
 
-    function showStage() {
-        const stage = stages[currentStage];
-        document.getElementById('stage-title').innerText = stage.title;
-        // 這裡暫時顯示您上傳的意象
-        document.getElementById('question-text').innerText = stage.question;
+    function loadStage() {
+        const data = stages[current];
+        document.getElementById('stage-title').innerText = data.title;
+        document.getElementById('stage-img').src = data.img;
+        document.getElementById('question-text').innerText = data.question;
+        document.getElementById('feedback-box').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
         
-        const choicesDiv = document.getElementById('choices');
-        choicesDiv.innerHTML = '';
-        stage.choices.forEach(choice => {
-            const btn = document.createElement('button');
-            btn.className = 'choice-btn';
-            btn.innerText = choice.text;
-            btn.onclick = () => {
-                alert(choice.feedback);
-                if(choice.correct) {
-                    currentStage++;
-                    if(currentStage < stages.length) {
-                        showStage();
-                    } else {
-                        finishGame();
-                    }
-                }
-            };
-            choicesDiv.appendChild(btn);
+        const choices = document.getElementById('choices');
+        choices.innerHTML = '';
+        data.options.forEach(opt => {
+            const b = document.createElement('button');
+            b.innerText = opt.text;
+            b.onclick = () => check(opt);
+            choices.appendChild(b);
         });
     }
 
-    function finishGame() {
-        document.getElementById('game-content').innerHTML = `
-            <h1>挑戰成功！</h1>
-            <p>你已獲得「辰光品格英雄」稱號！<br>責任、正義、感恩的能量已修復校園。</p>
-            <button class="btn" onclick="location.reload()">重新挑戰</button>
-        `;
+    function check(opt) {
+        const fb = document.getElementById('feedback-box');
+        fb.innerText = opt.info;
+        fb.style.display = 'block';
+        fb.className = 'feedback ' + (opt.correct ? 'correct' : 'wrong');
+        
+        if (opt.correct) {
+            document.getElementById('next-btn').style.display = 'block';
+            document.getElementById('choices').style.pointerEvents = 'none';
+        }
+    }
+
+    function nextStage() {
+        current++;
+        document.getElementById('choices').style.pointerEvents = 'auto';
+        if (current < stages.length) {
+            loadStage();
+        } else {
+            go('end');
+        }
     }
 </script>
 
