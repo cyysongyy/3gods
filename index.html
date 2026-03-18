@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>辰光英雄傳 - 品格守護者 180題典藏版</title>
+    <title>辰光英雄傳 - 品格守護者</title>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
     <style>
         :root { --primary: #ff3333; --gold: #ffd700; --bg-dark: #0a0a1a; --text-light: #ffffff; }
         body { 
             background: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.3) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(212, 160, 23, 0.2) 0%, transparent 40%);
-            font-family: "Microsoft JhengHei", sans-serif; 
-            margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden;
+            background-image: radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.3) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(212, 160, 23, 0.2) 0%, transparent 40%);
+            font-family: "Microsoft JhengHei", sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden;
         }
         #game-container { 
-            background: rgba(15, 15, 25, 0.95); width: 95%; max-width: 650px; padding: 35px; 
-            border-radius: 30px; text-align: center; position: relative; color: var(--text-light);
+            background: rgba(15, 15, 25, 0.95); width: 95%; max-width: 650px; padding: 35px; border-radius: 30px; text-align: center; position: relative; color: var(--text-light);
             box-shadow: 0 0 20px rgba(0,0,0,0.5); border: 3px solid transparent; background-clip: padding-box;
         }
         #game-container::after {
@@ -26,25 +22,23 @@
             border-radius: 35px; z-index: -1; animation: moveGradient 4s linear infinite; background-size: 300% 300%;
         }
         @keyframes moveGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        h1 { color: #fff; font-size: 2.8em; margin: 0; letter-spacing: 5px; text-shadow: 0 0 10px var(--gold); }
-        .line { width: 120px; height: 4px; background: var(--gold); margin: 10px auto 25px; border-radius: 2px; box-shadow: 0 0 15px var(--gold); }
+        h1 { font-size: 2.5em; margin: 0; text-shadow: 0 0 10px var(--gold); }
+        .line { width: 100px; height: 3px; background: var(--gold); margin: 10px auto 20px; box-shadow: 0 0 10px var(--gold); }
         .screen { display: none; animation: zoomIn 0.5s ease-out; }
         .active { display: block; }
         @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .img-box { width: 100%; height: 300px; background: rgba(255,255,255,0.05); border-radius: 20px; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; }
-        .img-box img { max-width: 90%; max-height: 90%; border-radius: 10px; z-index: 2; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+        .img-box { width: 100%; height: 280px; background: rgba(255,255,255,0.05); border-radius: 20px; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+        .img-box img { max-width: 85%; max-height: 85%; border-radius: 10px; z-index: 2; }
         .img-box::before { content: ""; position: absolute; width: 150%; height: 150%; background: conic-gradient(from 0deg, transparent, var(--gold), transparent 30%); animation: rotate 4s linear infinite; z-index: 1; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .question-meta { color: var(--gold); font-weight: bold; margin-bottom: 8px; font-size: 1.2em; text-shadow: 0 0 5px var(--gold); }
-        .question-text { font-size: 1.4em; color: #fff; margin-bottom: 25px; line-height: 1.5; min-height: 3.2em; display: flex; align-items: center; justify-content: center; }
-        .btn-list { display: grid; gap: 15px; }
-        button { padding: 18px 25px; font-size: 1.15em; cursor: pointer; border: none; border-radius: 50px; background: linear-gradient(145deg, #2a2a40, #1a1a2a); color: white; transition: 0.3s; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative; overflow: hidden; }
-        button:hover { transform: translateY(-3px); box-shadow: 0 0 20px var(--gold); color: var(--gold); }
-        .next-btn { background: linear-gradient(45deg, #8b0000, #ff0000) !important; color: white !important; margin-top: 25px; width: 100%; font-size: 1.3em; box-shadow: 0 0 15px rgba(255,0,0,0.5); }
-        .feedback { margin-top: 15px; padding: 18px; border-radius: 15px; display: none; font-size: 1.1em; line-height: 1.5; backdrop-filter: blur(5px); }
+        .question-text { font-size: 1.3em; margin-bottom: 20px; line-height: 1.5; min-height: 3em; display: flex; align-items: center; justify-content: center; padding: 0 10px; }
+        .btn-list { display: grid; gap: 12px; }
+        button { padding: 15px 20px; font-size: 1.1em; cursor: pointer; border: none; border-radius: 50px; background: linear-gradient(145deg, #2a2a40, #1a1a2a); color: white; transition: 0.3s; font-weight: bold; position: relative; overflow: hidden; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 0 15px var(--gold); color: var(--gold); }
+        .next-btn { background: linear-gradient(45deg, #8b0000, #ff0000) !important; color: white !important; margin-top: 20px; width: 100%; font-size: 1.2em; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 15px; display: none; font-size: 1em; line-height: 1.4; }
         .correct { background: rgba(103, 194, 58, 0.2); color: #85ff85; border: 1px solid #67c23a; }
         .wrong { background: rgba(245, 108, 108, 0.2); color: #ff8585; border: 1px solid #f5c6cb; }
-        .progress-bar { font-size: 0.9em; color: #ccc; margin-top: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 5px; }
     </style>
 </head>
 <body>
@@ -53,79 +47,237 @@
     <div id="s0" class="screen active">
         <h1>辰光英雄傳</h1>
         <div class="line"></div>
-        <p style="font-size: 1.25em; line-height: 1.7;">守護英雄請注意：<br>品格試煉已升級為 <b>180 題典藏庫</b>！<br>請先完成「英雄點名」挑戰。</p>
+        <p>守護英雄請注意：<br>品格試煉已備妥 <b>180 項</b> 挑戰！<br>請先完成「英雄點名」。</p>
         <button class="next-btn" onclick="startMatching()">⚔️ 開始點名</button>
     </div>
 
     <div id="matching-screen" class="screen">
-        <div class="question-meta">【前傳：英雄點名】</div>
+        <div style="color:var(--gold)">【 前傳：英雄點名 】</div>
         <div class="img-box"><img id="match-img" src=""></div>
         <div class="question-text">請問這尊守護神的名字是？</div>
         <div id="match-choices" class="btn-list"></div>
         <div id="match-feedback" class="feedback"></div>
-        <button id="btn-to-main" class="next-btn" style="display:none" onclick="startChallenge()">✨ 通過！進入試煉</button>
+        <button id="btn-to-main" class="next-btn" style="display:none" onclick="startChallenge()">✨ 開啟試煉</button>
     </div>
 
     <div id="game-play" class="screen">
-        <div class="question-meta" id="stage-info"></div>
+        <div id="stage-info" style="color:var(--gold); font-weight:bold; margin-bottom:5px;"></div>
         <div class="img-box"><img id="stage-img" src=""></div>
         <div class="question-text" id="q-text"></div>
         <div id="choice-list" class="btn-list"></div>
         <div id="fb-box" class="feedback"></div>
         <button id="btn-continue" class="next-btn" style="display:none" onclick="handleFlow()">🐾 繼續挑戰</button>
-        <div class="progress-bar" id="prog-text"></div>
+        <div style="font-size:0.8em; margin-top:15px; color:#888;" id="prog-text"></div>
     </div>
 
     <div id="s-end" class="screen">
-        <h1 style="color:var(--gold); font-size: 3em;">試煉達成！🏆</h1>
+        <h1 style="color:var(--gold)">試煉達成！🏆</h1>
         <div class="line"></div>
-        <p style="font-size: 1.3em;">你已從 180 項品格情境中通過挑戰！</p>
-        <div style="font-size: 5em; margin: 20px 0; filter: drop-shadow(0 0 10px var(--gold));">✨🛡️🏫</div>
-        <button class="next-btn" onclick="location.reload()">🔄 再練一次</button>
+        <p>品格之光已修復校園能量！</p>
+        <div style="font-size: 4em; margin: 10px 0;">✨🛡️✨</div>
+        <button class="next-btn" onclick="location.reload()">🔄 再次修煉</button>
     </div>
 </div>
 
 <script>
     const heroes = [
-        { name: "池府王爺", img: "tzu.jpg", trait: "責任" },
+        { name: "池府王爺", img: "tzu.jfif", trait: "責任" },
         { name: "廖添丁", img: "liu.jpg", trait: "正義" },
         { name: "廣澤尊王", img: "kuan.jpg", trait: "感恩" }
     ];
 
-    // --- 題庫擴充區：每類 60 題，總計 180 題 ---
     const allPools = {
         "池府王爺": [
-            { q: "看到走廊有積水，你會？", a: "🧹 拿抹布擦乾", b: "🏃‍♂️ 快速跳過去", fb: "【責任】主動消除安全隱患是負責的體現。" },
-            { q: "分組報告時，你會？", a: "🙋 主動承擔困難部分", b: "💤 躲在後面不出力", fb: "【責任】團隊的成功需要每個人的投入。" },
-            { q: "借來的書不小心弄濕了？", a: "🤝 誠實告知並賠償", b: "🤫 偷偷放回去", fb: "【責任】誠實面對錯誤是負責的開始。" },
-            // ... [此處已載入 60 題關於「責任」的情境題目]
+            { q: "看到走廊有積水，你會？", a: "🧹 拿抹布擦乾", b: "🏃‍♂️ 快速跳過去", fb: "負責任就是主動消除校園隱患！" },
+            { q: "小組討論沒進度，你會？", a: "🗣️ 主動分配工作", b: "🤐 反正不關我的事", fb: "領袖的責任是帶動大家前進。" },
+            { q: "看到同學沒關水龍頭？", a: "💧 主動幫忙關緊", b: "🙄 水費不是我出的", fb: "惜水如金是愛護地球的責任。" },
+            { q: "答應借書卻忘了帶？", a: "🤝 誠心道歉改天補", b: "🙈 假裝沒這回事", fb: "誠信是負責任的重要一環。" },
+            { q: "打掃區域沒人檢查時？", a: "✨ 依然打掃乾淨", b: "🍂 隨便揮兩下", fb: "對自己負責，不需要別人監督。" },
+            { q: "看到地上有落葉？", a: "🍂 順手撿起丟掉", b: "🚶‍♂️ 這是清潔隊的事", fb: "校園美化，人人有責。" },
+            { q: "老師交辦傳話工作？", a: "📢 準確傳達到位", b: "🐢 過了好久才說", fb: "完成任務展現可靠責任感。" },
+            { q: "學弟妹推擠受傷？", a: "🚑 協助送醫護室", b: "👣 直接繞道走", fb: "大幫小是我們的責任。" },
+            { q: "發現窗戶沒鎖？", a: "🔒 折返回去鎖好", b: "🌙 警衛等一下會鎖", fb: "細心負責能保護校園安全。" },
+            { q: "午餐剩下飯菜？", a: "🍱 盡力吃完不浪費", b: "🗑️ 全部倒掉", fb: "不浪費是基本責任。" },
+            { q: "不小心弄倒花瓶？", a: "😟 主動報告並整理", b: "🏃‍♀️ 趁沒人看快跑", fb: "勇於承擔意外的結果。" },
+            { q: "集體活動遲到了？", a: "⏰ 反省下次準時", b: "🤷‍♂️ 怪時鐘壞了", fb: "守時是尊重他人的責任。" },
+            { q: "領到通知單，你會？", a: "📝 回家交給家長", b: "🗑️ 塞在書包底", fb: "訊息傳遞是學生的職責。" },
+            { q: "看見有人破壞公物？", a: "✋ 溫柔制止或報告", b: "🔨 一起加入破壞", fb: "保護學校資產是大家的責任。" },
+            { q: "雖然作業很難？", a: "🤔 努力思考請教", b: "📝 直接抄別人的", fb: "學習是學生對自己負責。" },
+            { q: "整潔比賽輸了？", a: "🧐 找出缺點改進", b: "😤 覺得裁判不公", fb: "檢討與改進是成熟負責。" },
+            { q: "發現同學文具掉了？", a: "✏️ 幫忙撿起來", b: "🙈 裝作沒看見", fb: "互助共好是校園生活責任。" },
+            { q: "分到辛苦的工作？", a: "💪 當成鍛鍊機會", b: "😢 跟老師抱怨", fb: "難事我扛，就是英雄氣概。" },
+            { q: "代表班級參賽？", a: "🏆 全力以赴爭光", b: "🎈 隨便玩玩", fb: "不辜負大家的期待。" },
+            { q: "聯絡簿忘了簽名？", a: "🖋️ 提醒家長簽名", b: "🤫 明天自己簽", fb: "落實規定是負責的起點。" },
+            { q: "看到同學沒帶文具，你會？", a: "✏️ 主動借他備用的", b: "😒 誰叫他不帶", fb: "互助也是責任感的一種。" },
+            { q: "老師請你幫忙發聯絡本？", a: "📜 快速且準確地發完", b: "👣 慢慢走一邊玩", fb: "認真對待委託是負責任的表現。" },
+            { q: "回家發現鞋子亂丟？", a: "👞 擺放整齊", b: "👟 讓媽媽去收", fb: "整理個人物品是自我負責的開始。" },
+            { q: "發現考卷分數算錯多給分了？", a: "💯 主動找老師更正", b: "🤫 假裝不知道", fb: "對分數誠實也是一種責任。" },
+            { q: "答應幫同學照顧盆栽？", a: "🌱 每天按時澆水", b: "🍂 忘了也沒關係", fb: "受人之託忠人之事。" },
+            { q: "發現自己的抽屜很髒？", a: "🧹 下課馬上整理", b: "📦 繼續塞垃圾", fb: "環境衛生從個人區域負責。" },
+            { q: "分組討論時有人在玩？", a: "🤝 溫和提醒回歸正題", b: "🙉 跟著一起玩", fb: "維護團體進度是組員的責任。" },
+            { q: "看到電風扇沒人卻開著？", a: "🔌 隨手關閉電源", b: "🌬️ 反正學校出錢", fb: "節約能源是公民責任。" },
+            { q: "領到學校發的便當袋？", a: "🍱 每天帶回家清洗", b: "🤢 塞在學校一個月", fb: "衛生習慣是自我管理的責任。" },
+            { q: "老師交辦的作業忘記寫？", a: "🙋‍♀️ 承認錯誤並補齊", b: "🤐 說作業簿不見了", fb: "勇於面對過失是英雄的擔當。" },
+            { q: "在公車上看到老人，你會？", a: "💺 主動讓座", b: "📱 假裝滑手機看窗外", fb: "維護禮讓文化是社會責任。" },
+            { q: "發現水桶漏水了？", a: "🪣 報告總務處修理", b: "🚶 繞過去沒看到", fb: "守護校園設施是大家的責任。" },
+            { q: "參加升旗典禮時？", a: "🫡 肅立莊重不說話", b: "🗣️ 跟旁邊同學聊天", fb: "尊重儀式是學生的基本職責。" },
+            { q: "打掃時間被指派掃廁所？", a: "🧼 認真刷洗乾淨", b: "🤢 隨便潑水了事", fb: "每個崗位都值得被認真負責。" },
+            { q: "跟家人約好回家的時間？", a: "⌚ 準時不讓家人擔心", b: "🏃‍♂️ 玩過頭忘記回家", fb: "守時是對家人的責任。" },
+            { q: "拿了圖書館的書看？", a: "📚 看完放回正確分類", b: "📦 隨便塞在桌下", fb: "愛護公物並物歸原位。" },
+            { q: "看到低年級學妹受傷？", a: "🩹 帶去醫護室", b: "🏃 趕著去打球不管", fb: "照顧弱小是高年級的責任。" },
+            { q: "發現班級日誌沒寫？", a: "✍️ 主動提醒股長", b: "😶 不關我的事", fb: "關心班級事務是成員的義務。" },
+            { q: "吃飯時不小心掉飯粒？", a: "🍚 主動撿起丟掉", b: "👞 踩一踩裝沒看見", fb: "保持環境整潔是個人的責任。" },
+            { q: "看到同學沒排隊在推擠？", a: "✋ 提醒注意安全", b: "🙌 跟著一起推", fb: "維護秩序是每個英雄的職責。" },
+            { q: "帶寵物出門散步？", a: "💩 清理排泄物", b: "🚶 裝沒看到走掉", fb: "當一個負責任的飼主。" },
+            { q: "在網路上留言前？", a: "💻 想想話語是否負責", b: "⌨️ 隨意批評謾罵", fb: "數位公民應對言論負責。" },
+            { q: "看到操場有大石頭？", a: "🪨 搬到路邊防摔倒", b: "🏃 跳過去玩", fb: "主動排除危險是責任感的表現。" },
+            { q: "期末要把教室搬空？", a: "📦 認真清理自己雜物", b: "📦 留在抽屜留給下一屆", fb: "自己的垃圾自己處理。" },
+            { q: "同學請你保守秘密？", a: "🤐 絕對不對外說", b: "🗣️ 馬上告訴別人", fb: "守信用是負責的基礎。" },
+            { q: "校園遇到外賓參訪？", a: "🙋 有禮貌主動問好", b: "👻 做鬼臉跑掉", fb: "維護校風是學生的責任。" },
+            { q: "上課鐘響了，你會？", a: "🏃 趕快回座位預備", b: "🏃‍♂️ 繼續在外面逗留", fb: "尊重課堂是學習的責任。" },
+            { q: "代表學校去比賽？", a: "🏅 遵守競賽規則", b: "😈 為了贏而不擇手段", fb: "運動家精神就是負責的精神。" },
+            { q: "看到同學沒關窗戶就放學？", a: "🪟 順手幫忙關上", b: "🚶 反正不是我位子", fb: "守護教室安全是組員責任。" },
+            { q: "考卷發下來要訂正？", a: "✏️ 弄懂錯誤的地方", b: "🗑️ 揉掉丟進垃圾桶", fb: "對自己的學習成果負責。" },
+            { q: "發現公用飲水機故障？", a: "🔧 貼上故障紙條並通報", b: "🚶 繼續讓它滴水", fb: "愛護資源，主動回報問題。" },
+            { q: "跟同學分工做壁報？", a: "🎨 負責好自己的色塊", b: "🛌 等別人畫完", fb: "團隊分工要展現負責態度。" },
+            { q: "午睡時間到了，你會？", a: "🤫 安靜休息不吵人", b: "🗣️ 偷偷找同學講話", fb: "不干擾他人休息是負責的表現。" },
+            { q: "看到同學沒帶雨傘在淋雨？", a: "☂️ 主動邀請撐傘同行", b: "🚶 幸好我有帶", fb: "互助共好是校園責任感。" },
+            { q: "領到學校的愛心物資？", a: "🍎 心存感激並珍惜使用", b: "🗑️ 不喜歡就隨手丟", fb: "珍惜資源是負責的生活態度。" },
+            { q: "參加合唱團練習？", a: "🎵 認真聽節奏配合", b: "📢 亂叫亂唱好玩", fb: "尊重團體排練是團員責任。" },
+            { q: "發現同學受霸凌不求救？", a: "📞 告訴信任的老師", b: "🤐 怕被報復不敢說", fb: "伸張正義是每個人的責任。" },
+            { q: "期末收拾書櫃時？", a: "📚 把舊書整理回收", b: "🧹 直接塞到角落", fb: "妥善處理個人廢棄物。" },
+            { q: "看到同學在危險地方玩？", a: "🛑 制止並帶離現場", b: "👀 圍觀看熱鬧", fb: "守護安全，見義勇為。" },
+            { q: "擔任班級幹部時？", a: "🫡 公正執行職務", b: "😏 利用權力幫好友", fb: "職位就是責任，而非權力。" }
         ],
         "廖添丁": [
-            { q: "看到同學被嘲笑長相，你會？", a: "✋ 溫和制止嘲笑者", b: "😏 跟著在一旁偷笑", fb: "【正義】守護他人的尊嚴是正義的本色。" },
-            { q: "有人想帶你去抽菸，你會？", a: "🛑 堅定拒絕並勸阻", b: "💨 怕被笑膽小而跟去", fb: "【正義】堅持正確的原則就是英雄。" },
-            { q: "考試時發現好朋友作弊？", a: "💡 課後真誠勸導他", b: "🙊 幫他掩護老師視線", fb: "【正義】真正的義氣是帶朋友走正路。" },
-            // ... [此處已載入 60 題關於「正義」的情境題目]
+            { q: "有人威脅不准跟誰玩？", a: "🙅‍♂️ 勇敢說不", b: "🤐 聽他的話不理人", fb: "正義就是拒絕霸凌。" },
+            { q: "裁判誤判你得分？", a: "⚖️ 誠實修正分數", b: "😈 暗自高興繼續", fb: "誠實的公平才是真勝利。" },
+            { q: "同學被造謠排擠？", a: "🛡️ 主動幫忙澄清", b: "👂 覺得好玩跟著傳", fb: "流言止於智者，正義守護清白。" },
+            { q: "分組剩下一位同學？", a: "🤝 邀請他加入", b: "👀 假裝沒看見", fb: "不遺漏任何一人是慈悲。" },
+            { q: "有人打破玻璃賴給人？", a: "📢 勇敢說出實話", b: "🤐 怕得罪人不敢說", fb: "正義需要說真話的勇氣。" },
+            { q: "看到同學在插隊，你會？", a: "🚶‍♂️ 請他遵守規矩", b: "🏃‍♂️ 我也跟著插隊", fb: "守護秩序是維護公平。" },
+            { q: "發現學弟被勒索，你會？", a: "📞 立刻告知老師", b: "🫣 害怕地躲起來", fb: "正義是運用智慧保護弱小。" },
+            { q: "背後說老師壞話，你會？", a: "🤫 不參與並尊重", b: "🗣️ 一起吐槽老師", fb: "不語人是非也是正義。" },
+            { q: "看到不屬於他的東西？", a: "📦 提醒物歸原主", b: "😈 也想拿一份", fb: "正義不貪小便宜。" },
+            { q: "好友考試作弊，你會？", a: "💡 課後真誠勸導", b: "🙈 幫他遮掩視線", fb: "真朋友不看著對方墮落。" },
+            { q: "有人因為外型被取外號？", a: "✋ 禮貌請求對方停止", b: "😂 跟著叫好有趣", fb: "每個人都應受尊重。" },
+            { q: "看見有人欺負流浪狗？", a: "🐕 上前制止或救援", b: "🧱 一起拿石頭丟", fb: "對弱小生命的尊重是正義。" },
+            { q: "考卷加錯分了，你會？", a: "💯 主動找老師更正", b: "🤫 叫他不要說", fb: "公平比分數更重要。" },
+            { q: "班會有人被喝斥？", a: "✋ 請冷靜聽他說完", b: "🗣️ 幫著大聲喝斥", fb: "守護發言權是民主正義。" },
+            { q: "同學在廁所玩火，你會？", a: "⚠️ 立刻通報維護安全", b: "👀 覺得酷一起看", fb: "正義有時是及時的通報。" },
+            { q: "領獎品多拿了，你會？", a: "🎁 退回讓大家都有", b: "😒 抱怨拿太少", fb: "資源公正是正義體現。" },
+            { q: "同學動作慢被嫌？", a: "🐢 耐心等候並協助", b: "😠 催促並責罵他", fb: "包容也是一種溫柔正義。" },
+            { q: "校牆被亂噴漆？", a: "🏢 通報學校處理", b: "🎨 覺得是藝術", fb: "愛護公務，不容忍破壞。" },
+            { q: "有人約去危險地方，你會？", a: "🛑 堅定拒絕並勸阻", b: "😰 怕被笑膽小", fb: "保護生命就是正義。" },
+            { q: "發現同學拿著違禁品？", a: "✋ 勸他交出來", b: "🤫 幫他藏在櫃子", fb: "正義是不助紂為虐。" },
+            { q: "比賽有人靠關係獲勝？", a: "🗣️ 尋求合理管道申訴", b: "🛌 自認倒楣不管他", fb: "守護公平，從自己做起。" },
+            { q: "看到有人在散播不雅照？", a: "✋ 要求刪除並通報", b: "📸 轉發給好朋友看", fb: "保護他人隱私是正義。" },
+            { q: "有人要你一起去偷東西？", a: "🛑 嚴正拒絕並遠離", b: "🫣 幫忙把風就好", fb: "正義不容任何灰色地帶。" },
+            { q: "發現有人非法佔用愛心位？", a: "💺 委婉提醒座位用途", b: "🙉 關我什麼事", fb: "正義就是守護弱者的權利。" },
+            { q: "看到同學故意撕別人的書？", a: "🛑 制止並協助修復", b: "😹 覺得很有趣", fb: "正義是守護秩序與財產。" },
+            { q: "發現校友會經費被挪用？", a: "🔎 勇於檢舉真相", b: "🤐 假裝沒發現", fb: "揭露真相，守護公義。" },
+            { q: "看到路上有錢被風吹散？", a: "💵 幫忙撿給失主", b: "👞 用腳踩住偷拿", fb: "正義是君子愛財取之有道。" },
+            { q: "有人在公共場合插隊？", a: "👣 請對方按序排隊", b: "😤 背後大聲罵髒話", fb: "溫和堅定地維護規則。" },
+            { q: "看到同學在破壞路燈？", a: "✋ 制止破壞行為", b: "🏃 趕快跑掉不理", fb: "公物是大家的，正義要守護。" },
+            { q: "發現有人在背後桶人？", a: "🛡️ 出現制止並主持公道", b: "🤫 躲起來看熱鬧", fb: "正義需要及時出現。" },
+            { q: "有人給你錢要你改成績？", a: "🛑 拒絕賄賂並回報", b: "🤑 為了買遊戲而接受", fb: "誠信是正義的基石。" },
+            { q: "看到同學被高年級威脅？", a: "🤝 陪他一起找老師", b: "🏃 裝不認識走開", fb: "同儕互助是正義的展現。" },
+            { q: "有人在網路霸凌你的對手？", a: "🛑 留言制止暴力言論", b: "😏 活該被罵", fb: "正義不分敵我。" },
+            { q: "發現實驗數據是造假的？", a: "🧪 堅持重做並說實話", b: "📝 照樣交上去", fb: "科學的正義在於真實。" },
+            { q: "看到有人在餵流浪貓禁食？", a: "🛑 說明食物危害並勸阻", b: "🤐 懶得管閒事", fb: "正義及於萬物生命。" },
+            { q: "發現同學帶手機進考場？", a: "✋ 考試前提醒他收好", b: "🤐 等他作弊後再笑他", fb: "正義是防止錯誤發生。" },
+            { q: "看到有人在博愛座裝睡？", a: "💺 叫醒他請他讓給孕婦", b: "🙄 眼神鄙視但不行動", fb: "正義需要行動力。" },
+            { q: "有人散播你的不實謠言？", a: "⚖️ 尋求正確管道澄清", b: "🤬 用更難聽的話回罵", fb: "正義是不隨暴制暴。" },
+            { q: "發現有人在水溝倒廢油？", a: "🛢️ 拍照通報環保局", b: "🚶 反正不是我家", fb: "守護環境是大正義。" },
+            { q: "看到有人在破壞圖書館書籍？", a: "📚 告知管理員處理", b: "🤫 不要管比較安全", fb: "公用資源需要每個人守護。" },
+            { q: "有人要你加入詐騙群組？", a: "🛑 拒絕並向大人通報", b: "🤔 好像可以賺錢試試", fb: "正義是辨別是非善惡。" },
+            { q: "看到同學因貧困被取笑？", a: "💖 挺身而出制止嘲笑", b: "😷 雖然同情但不說話", fb: "正義包含對弱勢的關懷。" },
+            { q: "發現有人在考卷背後寫罵人的話？", a: "✋ 清除並提醒不要這樣", b: "😏 給其他人看", fb: "正義不應傳播負面情緒。" },
+            { q: "看到有人在電梯裡亂按所有層？", a: "🛑 請對方尊重使用者", b: "😠 生氣但不說出口", fb: "維護公共利益即正義。" },
+            { q: "有人偷拿你的文具去用？", a: "🗣️ 平靜要求歸還", b: "👊 直接打他一頓", fb: "用理性的方式主持正義。" },
+            { q: "看見有人在停車場刮別人的車？", a: "🚗 報警或告知警衛", b: "🚶 走開以免麻煩", fb: "不做冷漠的旁觀者。" },
+            { q: "發現同學的努力被別人冒領？", a: "📣 向老師說明真相", b: "🤐 怕得罪人不敢講", fb: "守護每個人的心血成果。" },
+            { q: "看到有人在網路上公審同學？", a: "🛡️ 提醒大家理性溝通", b: "🔥 跟著留言煽風點火", fb: "正義是不做網路暴民。" },
+            { q: "有人帶你去闖紅燈？", a: "🛑 堅持綠燈再走", b: "🚦 看沒車就跟著跑", fb: "遵守法律是正義的底線。" },
+            { q: "看到有人在破壞公園遊樂器材？", a: "✋ 制止並通報管理單位", b: "🚶‍♂️ 以後不來玩就好", fb: "維護公共空間的正義。" },
+            { q: "有人要你一起排擠新同學？", a: "🤝 主動去關心新同學", b: "🤐 聽大家的話一起不理", fb: "正義是不隨波逐流。" },
+            { q: "發現有人在更衣室偷拍？", a: "📸 大聲呼救並阻止", b: "😱 嚇到跑掉不說", fb: "正義是守護尊嚴底線。" },
+            { q: "看到有人在濫用學校資源？", a: "✋ 委婉提醒愛惜資源", b: "💸 反正學校錢多", fb: "正義是不佔便宜。" },
+            { q: "有人說謊想讓老師討厭你？", a: "⚖️ 用證據證明清白", b: "😡 找人揍他一頓", fb: "正義不需要暴力來維持。" },
+            { q: "看到有人在欺負外國轉學生？", a: "🤝 站出來當他的朋友", b: "🤨 聽不懂他說話不管", fb: "跨越國界的正義與包容。" },
+            { q: "發現有人偷走別人的遺失物？", a: "✋ 擋住他並請他歸還", b: "🙄 他撿到的就是他的", fb: "正義是不容忍竊盜。" },
+            { q: "看到有人在廁所寫髒話罵人？", a: "🧹 報告老師協助清理", b: "🖋️ 在下面加兩句", fb: "正義是不增加仇恨。" },
+            { q: "有人要你一起去打群架？", a: "🛑 報警並堅定拒絕", b: "🙌 為了朋友一定要去", fb: "暴力不是解決問題的方法。" },
+            { q: "看到有人故意把球踢向同學？", a: "✋ 接住球並制止行為", b: "😂 差點就踢中了", fb: "守護身邊的人是正義。" },
+            { q: "發現自己不小心弄壞的東西？", a: "📦 勇敢自首賠償", b: "🤐 趁沒人看到放回去", fb: "正義包含對自己誠實。" }
         ],
         "廣澤尊王": [
-            { q: "吃完午餐後，你會？", a: "🥣 對廚工阿姨道謝", b: "🙄 覺得那是工作不必謝", fb: "【感恩】看見別人的付出並心懷感激。" },
-            { q: "家長辛苦接送你上學？", a: "🚗 主動說聲謝謝您", b: "😠 抱怨天氣太熱", fb: "【感恩】家人的愛並非理所當然。" },
-            { q: "今天平安度過了一天？", a: "💖 心存感謝珍惜一切", b: "🥱 覺得生活無聊透頂", fb: "【感恩】平安就是福，常懷感恩心。" },
-            // ... [此處已載入 60 題關於「感恩」的情境題目]
+            { q: "吃完飯看見廚工辛苦？", a: "🥣 感激並收好盤子", b: "🙄 覺得那是工作", fb: "感恩每一份默默的辛勞。" },
+            { q: "收到同學手作卡片？", a: "💌 開心道謝並珍藏", b: "🗑️ 隨手丟在抽屜", fb: "感恩他人的用心。" },
+            { q: "清潔人員在掃地，你會？", a: "🙇‍♂️ 點頭致意說辛苦了", b: "🏃‍♂️ 趕快跑開怕弄髒", fb: "感恩是看見別人的不容易。" },
+            { q: "家長來接你放學，你會？", a: "🚗 主動說謝謝來接我", b: "😠 抱怨遲到", fb: "家人的愛並非理所當然。" },
+            { q: "接受幫助後，你會？", a: "🔄 找機會回報對方", b: "🚶‍♂️ 受人點滴後即忘", fb: "感恩是善的循環。" },
+            { q: "看到校園花草，你會？", a: "🌻 感謝自然並愛護", b: "👟 隨意踐踏", fb: "對自然的感恩滋養心靈。" },
+            { q: "老師寫鼓勵的話，你會？", a: "📖 心懷感激讀完", b: "📕 看都不看就蓋上", fb: "感恩願意為你付出的人。" },
+            { q: "同學教你數學題？", a: "🙏 真誠道謝", b: "😏 覺得他在炫耀", fb: "感恩知識分享，自己更進步。" },
+            { q: "今天平安度過，你會？", a: "💖 感謝珍惜這一天", b: "🥱 覺得好無聊", fb: "平安就是福，常懷感恩心。" },
+            { q: "挫折有人陪伴，你會？", a: "🤗 感謝陪伴的力量", b: "😠 把氣出在對方", fb: "感恩患難中的陪伴。" },
+            { q: "警衛幫忙開門，你會？", a: "👮‍♂️ 微笑問好道謝", b: "🚶‍♂️ 理直氣壯走入", fb: "感恩每個守護校園的小角落。" },
+            { q: "穿著乾淨的制服？", a: "👕 感謝家人洗衣", b: "🤮 覺得制服醜", fb: "生活瑣碎處處有愛。" },
+            { q: "外教玩得開心？", a: "🚌 寫文感謝主辦方", b: "😒 抱怨車子舊", fb: "感恩背後的行政籌備。" },
+            { q: "校護幫你擦藥，你會？", a: "👩‍⚕️ 說謝謝幫我止痛", b: "😭 哭鬧嫌藥水痛", fb: "感恩醫療人員的專業。" },
+            { q: "這學期有進步？", a: "📈 感謝師生支持", b: "🧠 覺得全靠自己", fb: "成功背後必有眾人扶持。" },
+            { q: "拿到新教科書？", a: "📘 感謝知識的恩賜", b: "🎨 在上面亂畫", fb: "珍惜知識才會有力量。" },
+            { q: "義工講故事給你聽？", a: "🧙‍♀️ 專心聽並回應", b: "🗣️ 在下面聊天", fb: "感恩別人的時間與愛心。" },
+            { q: "看見太陽升起？", a: "🌅 感受恩賜與希望", b: "😪 抱怨又要上學", fb: "感恩每天是新的開始。" },
+            { q: "收到不合穿的衣服？", a: "🎁 感謝對方的好意", b: "😒 當面嫌棄大小", fb: "感恩心意，而非物品。" },
+            { q: "讀到感人文章？", a: "🔖 感謝作者的勇氣", b: "🌬️ 隨手翻過", fb: "感恩文字帶來的共鳴。" },
+            { q: "看到導護志工在曬太陽？", a: "🫡 點頭說聲辛苦了", b: "🏃 趕快跑走不看他", fb: "感恩志工守護我們的安全。" },
+            { q: "朋友借你傘？", a: "🌂 晾乾後恭敬歸還", b: "💨 丟在玄關不理", fb: "感恩並愛惜別人的分享。" },
+            { q: "吃到美味的晚餐？", a: "🍱 感謝煮飯的人", b: "👅 挑食抱怨難吃", fb: "感恩勞動成果。" },
+            { q: "有人主動替你擋門？", a: "🤝 回以微笑並道謝", b: "🚶 直接走入沒表情", fb: "小小的感謝讓社會更溫暖。" },
+            { q: "看到老師在改聯絡簿？", a: "📝 心裡感謝老師的叮嚀", b: "🙄 覺得老師管很多", fb: "感恩師長的用心良苦。" },
+            { q: "順利完成了分組報告？", a: "👏 感謝組員的努力", b: "🏆 覺得都是我的功勞", fb: "感恩團隊的合作。" },
+            { q: "看到盛開的校樹？", a: "🌳 感謝它提供綠蔭", b: "🍂 亂摘樹葉來玩", fb: "感恩自然的贈與。" },
+            { q: "爸爸幫你修好了玩具？", a: "🚂 抱抱爸爸說謝謝", b: "🙄 本來就該修好", fb: "家人的付出應被看見。" },
+            { q: "有人提醒你拉鍊沒拉？", a: "🤐 尷尬但真誠道謝", b: "😡 覺得對方多管閒事", fb: "感恩別人的善意提醒。" },
+            { q: "聽到一首動人的歌？", a: "🎵 感恩音樂撫慰心靈", b: "🔇 沒感覺隨便聽", fb: "感恩生命中的美感。" },
+            { q: "獲得了上台領獎的機會？", a: "🏆 感謝對手的競爭", b: "😎 覺得對手都太弱", fb: "感恩競爭讓你更進步。" },
+            { q: "同學送你他的舊遊戲？", a: "🎮 感謝他的慷慨分享", b: "🙄 嫌東西太舊", fb: "感恩心意，不嫌舊物。" },
+            { q: "路人指引你正確的方向？", a: "🗺️ 禮貌道謝", b: "🏃 轉頭就跑沒反應", fb: "感恩陌生人的善意。" },
+            { q: "看到這學期長高了？", a: "🥛 感謝食物與運動", b: "📏 沒什麼大不了", fb: "感恩健康的成長。" },
+            { q: "家長幫你買了新文具？", a: "✏️ 寫張卡片感謝", b: "😒 怎麼不是名牌", fb: "感恩每一份生活資助。" },
+            { q: "聽完一場精采演講？", a: "👏 熱烈鼓掌表示感謝", b: "😴 睡到結束不鼓掌", fb: "尊重與感恩演講者的付出。" },
+            { q: "有人幫你拍了一張美照？", a: "📷 大讚並道謝", b: "😒 拍得真醜", fb: "感恩別人的視角與服務。" },
+            { q: "發現書本解答解決難題？", a: "📖 感恩編書人的智慧", b: "🗑️ 抄完就算了", fb: "感恩知識的載體。" },
+            { q: "看到警消人員在執勤？", a: "🫡 肅然起敬並感謝", b: "🚒 擋路真討厭", fb: "感恩社會守護者的奉獻。" },
+            { q: "有人主動幫你提重物？", a: "💪 真誠感謝他的幫忙", b: "😒 反正他力氣大", fb: "感恩不分體型強弱。" },
+            { q: "獲得了出國旅遊的機會？", a: "✈️ 感謝這難得的見聞", b: "🙄 怎麼不去更遠的地方", fb: "感恩廣闊的世界與機會。" },
+            { q: "看到運動場整理得很平整？", a: "🏃 感謝維護人員", b: "👟 亂挖洞來玩", fb: "感恩現成的便利資源。" },
+            { q: "生病時家人整夜照顧？", a: "💊 痊癒後主動道謝", b: "🥱 為什麼不早點治好我", fb: "感恩生病時的陪伴。" },
+            { q: "收到不知名人士的捐款？", a: "💖 承諾未來也回饋社會", b: "🤑 太好了有錢領", fb: "感恩大眾的善念。" },
+            { q: "在涼爽的冷氣房上課？", a: "❄️ 感謝學校的設備", b: "🌬️ 抱怨不夠涼", fb: "感恩生活中的便利。" },
+            { q: "讀到歷史人物的故事？", a: "📜 感謝先輩的開創", b: "💤 考試又不考", fb: "感恩文明的傳承。" },
+            { q: "有人幫你撿起掉落的錢？", a: "💵 驚喜並深深道謝", b: "🚶 直接拿走沒說話", fb: "感恩正直的人性。" },
+            { q: "看到美麗的夕陽？", a: "🌇 停下腳步感謝自然", b: "🌃 趕快回家玩遊戲", fb: "感恩生命的美好瞬間。" },
+            { q: "有人在你難過時遞面紙？", a: "🤧 感激這份體貼", b: "🙄 我不需要憐憫", fb: "感恩小小溫暖。" },
+            { q: "老師帶大家去看電影？", a: "🎬 感謝老師的用心安排", b: "😴 選的片子好難看", fb: "感恩額外的學習機會。" },
+            { q: "看到回收場整理得很整齊？", a: "♻️ 感謝分類者的辛苦", b: "🗑️ 隨便丟進去弄亂", fb: "感恩秩序的建立者。" },
+            { q: "有人送你一朵花？", a: "🌸 開心接受並道謝", b: "🙄 送這個幹嘛", fb: "感恩生命中的點綴。" },
+            { q: "順利考上了理想的班級？", a: "🏫 感謝一路上支持的人", b: "😎 都是我太聰明", fb: "感恩成就背後的助力。" },
+            { q: "看到校園裡沒垃圾？", a: "✨ 感謝大家的共同維護", b: "🧹 本來就該乾淨", fb: "感恩群體的自律。" },
+            { q: "有人分享零食給你吃？", a: "🍬 感謝他的慷慨", b: "😝 這牌子好難吃", fb: "感恩分享的喜悅。" },
+            { q: "家長幫你買了新的慢跑鞋？", a: "👟 每天穿它去運動感謝", b: "😤 顏色不是我最愛的", fb: "感恩物資的支持。" },
+            { q: "看到導護老師滿頭大汗？", a: "🫡 點頭致意道辛苦", b: "🚶 裝沒看到走過去", fb: "感恩身邊的守護者。" },
+            { q: "有人在你比賽輸時安慰你？", a: "🤝 感謝他的鼓勵", b: "😡 輸了別跟我說話", fb: "感恩挫折時的陪伴。" },
+            { q: "看到這個世界充滿光亮？", a: "💡 感恩愛迪生與科學家", b: "🌑 只有黑夜才好玩", fb: "感恩文明進步的累積。" },
+            { q: "完成了這 180 題挑戰？", a: "🌟 感恩自己變更棒了", b: "😴 終於玩完了", fb: "感恩堅持與成長的自己！" }
         ]
     };
 
-    // 自動生成補充題目邏輯 (為維持示範碼大小，剩餘題目由邏輯補充)
-    for(let h in allPools) {
-        while(allPools[h].length < 60) {
-            allPools[h].push({
-                q: `${h}的額外試煉：面對誘惑時你會堅守${h==="池府王爺"?"責任":h==="廖添丁"?"正義":"感恩"}嗎？`,
-                a: "💎 是的，我會堅持正確選擇", b: "☁️ 隨波逐流沒關係",
-                fb: `【${h==="池府王爺"?"責任":h==="廖添丁"?"正義":"感恩"}】修煉不間斷，品格更閃亮！`
-            });
-        }
-    }
+    let gameStages = [];
+    let currentStageIdx = 0, currentSubIdx = 0, matchHero;
 
-    let gameStages = [], currentStageIdx = 0, currentSubIdx = 0, matchHero;
     function celebrate() { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#ff0000', '#ffd700', '#ffffff'] }); }
 
     function startMatching() {
@@ -173,7 +325,7 @@
         document.getElementById('q-text').innerText = qData.q;
         document.getElementById('fb-box').style.display = 'none';
         document.getElementById('btn-continue').style.display = 'none';
-        document.getElementById('prog-text').innerText = `目前挑戰：${(currentStageIdx*2)+currentSubIdx+1} / 6 (題庫總量: 180)`;
+        document.getElementById('prog-text').innerText = `挑戰進度：${(currentStageIdx*2)+currentSubIdx+1} / 6 (題庫庫存：180題)`;
         const list = document.getElementById('choice-list');
         list.innerHTML = '';
         const ops = [{ text: qData.a, correct: true }, { text: qData.b, correct: false }].sort(() => Math.random() - 0.5);
